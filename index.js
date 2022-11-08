@@ -1,5 +1,7 @@
 import express from 'express'
 import router from './src/routes/index.js';
+import { config } from 'dotenv';
+config()
 
 const server = express()
 
