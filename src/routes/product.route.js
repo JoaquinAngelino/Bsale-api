@@ -4,16 +4,23 @@ import { pool } from "../db.js";
 const productRoutes = Router()
 
 productRoutes.get('/', async (req, res) => {
-  const page = req.query.page - 1 || 0
-  let whereName = req.query.name ? ` WHERE product.name LIKE "%${req.query.name}%"` : ''
+  const { page, category, name } = req.query
+  let whereName = name ? ` WHERE product.name LIKE "%${name}%"` : ``
+  if (category && name) {
+    whereName += ` AND `
+  } else {
+    if (category) {
+      whereName += ` WHERE `
+    }
+  }
+  let whereCategory = category ? `product.category = ${category} ` : ``
   try {
-    const count = (await pool.query(`SELECT COUNT(*) FROM product${whereName}`))[0][0]
-    const result = (await pool.query(`SELECT * FROM product ${whereName} LIMIT ${page * 6}, 6 ;`))[0]
-    console.log("products routes");
+    const count = (await pool.query(`SELECT COUNT(*) FROM product${whereName}${whereCategory}`))[0][0]
+    const result = (await pool.query(`SELECT * FROM product ${whereName} ${whereCategory} LIMIT ${(page - 1 || 0) * 6}, 6 ;`))[0]
     res.send({ count: count["COUNT(*)"], pages: Math.ceil(count["COUNT(*)"] / 6), result })
   } catch (error) {
     console.log(error);
-    res.send({count: 0, pages: 0, result: [], error })
+    res.send({ count: 0, pages: 0, result: [], error })
   }
 })
 
