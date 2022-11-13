@@ -15,7 +15,7 @@ server.use((_req, res, next) => {
 });
 
 server.use('/', router)
-server.use((req, res, next) => {
+server.use((_req, res, next) => {
   res.status(404).send({ message: "endpoint not found" })
 })
 
