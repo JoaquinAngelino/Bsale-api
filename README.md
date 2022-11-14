@@ -1,8 +1,11 @@
 # Bsale-api
 
 ## Requisitos generales:
-Agregar un buscador, el cual tiene que estar implementado a nivel de servidor, mediante una Api Rest cuyo lenguaje y framework puede ser de libre elección.
-Es decir, los datos de productos deben llegar filtrados al cliente.
+Generar un Backend que permita lo siguiente:
+- Agregar un buscador, el cual tiene que estar implementado a nivel de servidor, mediante una Api Rest.
+- Es decir, los datos de productos deben llegar filtrados al cliente. 
+- Utilizar la base de datos provista.
+- Disponibilizar la aplicación en un hosting.
 
 ## Autoria
 Este ejercicio, no tiene ningún fin comercial ni estratégico, sólo busca medir habilidades y conocimientos
